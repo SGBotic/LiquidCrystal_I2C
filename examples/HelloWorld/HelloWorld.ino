@@ -13,10 +13,10 @@ void setup()
  
   // Print a message to the LCD.
   lcd.backlight();
-  lcd.setCursor(4,0); // set cursor to column 4, row 0
-  lcd.print("Hello, world!");
-  lcd.setCursor(3,1); // set cursor to column 3, row 1
-  lcd.print("I2C LCD Module");
+  lcd.setCursor(1,0); // set cursor to column 4, row 0
+  lcd.print("16 x 2 Display");
+  lcd.setCursor(1,1); // set cursor to column 3, row 1
+  lcd.print("I2C addr: 0x3F");
 }
 
 void loop()
