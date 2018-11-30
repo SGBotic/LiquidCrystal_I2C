@@ -9,26 +9,38 @@
 
 #include "LiquidCrystal_I2C.h"
 #include <inttypes.h>
-#if defined(ARDUINO) && ARDUINO >= 100
 
+#ifdef __AVR
+  #include <avr/pgmspace.h>
+#elif defined(ESP8266)
+  #include <pgmspace.h>
+#endif
+
+#if ARDUINO >= 100
 #include "Arduino.h"
-
-#define printIIC(args)	Wire.write(args)
-inline size_t LiquidCrystal_I2C::write(uint8_t value) {
-	send(value, Rs);
-	return 0;
-}
-
 #else
 #include "WProgram.h"
+#endif
 
-#define printIIC(args)	Wire.send(args)
-inline void LiquidCrystal_I2C::write(uint8_t value) {
-	send(value, Rs);
+
+static inline void printIIC(uint8_t x) {
+#if ARDUINO >= 100
+	Wire.write((uint8_t) x);
+#else
+	Wire.send(x);
+#endif
 }
 
+#if ARDUINO >= 100
+	inline size_t LiquidCrystal_I2C::write(uint8_t value) {
+	send(value, Rs);
+	return 1;
+}
+#else
+	inline void LiquidCrystal_I2C::write(uint8_t value) {
+	send(value, Rs);
 #endif
-#include "Wire.h"
+
 
 
 
