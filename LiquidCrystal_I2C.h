@@ -85,7 +85,7 @@ public:
 #endif
   void command(uint8_t);
   void init();
-
+  void init(uint8_t SDA_PIN, uint8_t SCL_PIN); 
 ////compatibility API function aliases
 void blink_on();						// alias for blink()
 void blink_off();       					// alias for noBlink()
